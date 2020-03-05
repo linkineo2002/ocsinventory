@@ -1,11 +1,11 @@
 #!/bin/bash
 # Autor: Robson Vaamonde
-# Site: www.procedimentosemti.com.br
+# Edicao: Fabio Silva
 # Facebook: facebook.com/ProcedimentosEmTI
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
 # Data de criação: 17/06/2017
-# Data de atualização: 14/07/2019
+# Data de atualização: 05/03/2020
 # Versão: 0.10
 # Testado e homologado para a versão do Ubuntu Server 16.04.x LTS x64
 # Kernel >= 4.4.x
@@ -71,9 +71,9 @@ OCSAGENTINSTALL="Ocsinventory-Unix-Agent-2.4.2"
 # Variáveis de download do GLPI Help Desk
 # Site: http://glpi-project.org/spip.php?article41
 # Versão antiga utilizada no vídeo: 9.2.1/glpi-9.2.1.tgz
-# Versão atualizada para 9.4.2 no dia 13/06/2019 - verificar arquivo CHANGELOG
-GLPIVERSION="9.4.2/glpi-9.4.2.tgz"
-GLPITAR="glpi-9.4.2.tgz"
+# Versão atualizada para 9.4.5 no dia 05/03/2020 - verificar arquivo CHANGELOG
+GLPIVERSION="9.4.5/glpi-9.4.5.tgz"
+GLPITAR="glpi-9.4.5.tgz"
 GLPIINSTALL="glpi"
 #
 
@@ -89,19 +89,19 @@ GLPIOCSINSTALL="ocsinventoryng"
 # Variáveis de download do FusionInventory Server para GLPI
 # Site: https://github.com/fusioninventory/fusioninventory-for-glpi/releases
 # Versão antiga utilizada no vídeo: glpi9.2%2B1.0/glpi-fusioninventory-9.2.1.0.tar.bz2
-# Versão atualizada para 9.4+1.1 no dia 14/06/2019 - verificar arquivo CHANGELOG
-GLPIFISVERSION="glpi9.4%2B1.1/fusioninventory-9.4+1.1.tar.bz2"
-GLPIFISTAR="fusioninventory-9.4+1.1.tar.bz2"
+# Versão atualizada para 9.4+2.4 no dia 05/03/2020 - verificar arquivo CHANGELOG
+GLPIFISVERSION="glpi9.4%2B2.4/fusioninventory-9.4+2.4.tar.bz2"
+GLPIFISTAR="fusioninventory-9.4+2.4.tar.bz2"
 GLPIFISINSTALL="fusioninventory"
 #
 
 # Variáveis de download do FusionInventory Agent
 # Site: https://github.com/fusioninventory/fusioninventory-agent/releases/
 # Versão antiga utilizada no vídeo: 2.4/FusionInventory-Agent-2.4.tar.gz
-# Versão atualizada para 2.5 no dia 14/06/2019 - verificar arquivo CHANGELOG
-GLPIFIAVERSION="2.5/FusionInventory-Agent-2.5.tar.gz"
-GLPIFIATAR="FusionInventory-Agent-2.5.tar.gz"
-GLPIFIAINSTALL="FusionInventory-Agent-2.5"
+# Versão atualizada para 2.5.2 no dia 05/03/2020 - verificar arquivo CHANGELOG
+GLPIFIAVERSION="2.5.2/FusionInventory-Agent-2.5.2.tar.gz"
+GLPIFIATAR="FusionInventory-Agent-2.5.2.tar.gz"
+GLPIFIAINSTALL="FusionInventory-Agent-2.5.2"
 #
 
 # Variáveis de download do Netdata
@@ -126,10 +126,12 @@ NVIDIA=`lshw -class display | grep NVIDIA | cut -d':' -f2 | cut -d' ' -f2`
 # Site: https://www.ocsinventory-ng.org/en/
 # Versões antigas utilizada no vídeo: Win10-2.3.1.1, WinXP-2.1.1, Mac-2.3.1, Android-2.3.1, Tools-2.3 e Deploy-2.3
 # Versões novas atualizadas no dia 14/06/2019 - verificar arquivo CHANGELOG
+OCSAGENTWIN10X64="https://github.com/OCSInventory-NG/WindowsAgent/releases/download/2.6.0.0/OCSNG-Windows-Agent-2.6.0.0.zip"
 OCSAGENTWIN10="https://github.com/OCSInventory-NG/WindowsAgent/releases/download/2.4.0.0/OCSNG-Windows-Agent-2.4.0.0.zip"
 OCSAGENTWINXP="https://github.com/OCSInventory-NG/WindowsAgent/releases/download/2.1.1.1/OCSNG-Windows-Agent-2.1.1.zip"
 OCSAGENTMAC="https://github.com/OCSInventory-NG/UnixAgent/releases/download/v2.4.2/Ocsinventory_Agent_MacOSX-2.4.2.pkg.zip"
 OCSAGENTANDROID="https://github.com/OCSInventory-NG/AndroidAgent/releases/download/2.3.1/OCSNG-Android-Agent-2.3.1.apk"
+OCSAGENTTOOLSX64="https://github.com/OCSInventory-NG/Packager-for-Windows/releases/download/2.6/OCSNG-Windows-Packager-2.6.zip"
 OCSAGENTTOOLS="https://github.com/OCSInventory-NG/Packager-for-Windows/releases/download/2.3/OCSNG-Windows-Packager-2.3.zip"
 OCSAGENTDEPLOY="https://github.com/OCSInventory-NG/Agent-Deployment-Tool/releases/download/2.3/OCSNG-Agent-Deploy-Tool-2.3.zip"
 OCSUNIXPACKAGER="https://github.com/OCSInventory-NG/Packager-for-Unix/releases/download/1.0/OCSNG-Unix-Packager-1.0.zip"
