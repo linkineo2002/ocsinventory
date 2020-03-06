@@ -1,6 +1,6 @@
 #!/bin/sh
 # Autor: Robson Vaamonde
-# Site: www.procedimentosemti.com.br
+# Edicao: Fabio Silva
 # Facebook: facebook.com/ProcedimentosEmTI
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
@@ -14,7 +14,7 @@
 # Recomendado fazer a instalação de 5 em 5, verificar sempre as versões dos software
 
 #Instalar primeiro o comando wget: pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/wget-1.19.4.txz
-#Depois baixar o script: /usr/local/bin/wget http://172.16.10.11/download/pfsenseinstall.sh
+#Depois baixar o script: /usr/local/bin/wget http://192.168.15.11/download/pfsenseinstall.sh
 
 echo -e "Primeira etapa de instalação, aguarde..."
 pkg add http://pkg.freebsd.org/freebsd:11:x86:64/latest/All/p5-URI-1.73.txz
@@ -134,7 +134,7 @@ echo -e "Instalação feita com sucesso!!!, continuando o script em 5 segundos..
 sleep 5
 
 echo -e "Baixando o arquivo de configuração do OCS Inventory Agent, aguarde..."
-/usr/local/bin/wget http://172.16.10.11/download/ocsinventory-agent.cfg -O /etc/ocsinventory/ocsinventory-agent.cfg
+/usr/local/bin/wget http://192.168.15.11/download/ocsinventory-agent.cfg -O /etc/ocsinventory/ocsinventory-agent.cfg
 echo -e "Arquivo baixado com sucesso!!!, continuando o script em 5 segundos..."
 sleep 5
 
