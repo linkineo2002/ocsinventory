@@ -1,6 +1,6 @@
 #!/bin/bash
 # Autor: Robson Vaamonde
-# Site: www.procedimentosemti.com.br
+# Edicao: Fabio Silva
 # Facebook: facebook.com/ProcedimentosEmTI
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
@@ -52,9 +52,11 @@ then
 					 sleep 2
 					 
 					 echo -e "Download dos arquivos, aguarde..."
+					 wget $OCSAGENTWIN10X64 -O /var/lib/ocsinventory-reports/download/OCSAgentWin10x64.zip &>> $LOG
 					 wget $OCSAGENTWIN10 -O /var/lib/ocsinventory-reports/download/OCSAgentWin10.zip &>> $LOG
 					 wget $OCSAGENTWINXP -O /var/lib/ocsinventory-reports/download/OCSAgentWinXP.zip &>> $LOG
 					 wget $OCSAGENTMAC -O /var/lib/ocsinventory-reports/download/OCSAgentMAC.zip &>> $LOG
+					 wget $OCSAGENTTOOLSX64 -O /var/lib/ocsinventory-reports/download/OCSAgentToolsx64.zip &>> $LOG
 					 wget $OCSAGENTTOOLS -O /var/lib/ocsinventory-reports/download/OCSAgentTools.zip &>> $LOG
 					 wget $OCSAGENTDEPLOY -O /var/lib/ocsinventory-reports/download/OCSAgentDeploy.zip &>> $LOG
 					 wget $OCSAGENTANDROID -O /var/lib/ocsinventory-reports/download/OCSAgentAndroid.apk &>> $LOG
