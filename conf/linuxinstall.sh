@@ -1,6 +1,6 @@
 #!/bin/bash
 # Autor: Robson Vaamonde
-# Site: www.procedimentosemti.com.br
+# Edicao: Fabio Silva
 # Facebook: facebook.com/ProcedimentosEmTI
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
@@ -43,9 +43,9 @@ clear
 
 echo -e "Baixando o arquivo do Certificado e das Configurações do OCS Inventory Agent, aguarde..."
 # Fazendo o download dos arquivos do Servidor OCS Inventory
-wget http://ocs.pti.intra/download/ocs.crt
+wget http://ocs.aexlog.intra/download/ocs.crt
 echo
-wget http://ocs.pti.intra/download/ocsinventory-agent.cfg
+wget http://ocs.aexlog.intra/download/ocsinventory-agent.cfg
 echo -e "Pressione <Enter> para continuar..."
 read
 clear
@@ -68,7 +68,7 @@ clear
 
 echo -e "Testando a conexão HTTPS, aguarde..."
 # Testando se o Certificado está funcionando com o wget
-wget https://ocs.pti.intra/download/ocs.crt -O /tmp/ocs.crt
+wget https://ocs.aexlog.intra/download/ocs.crt -O /tmp/ocs.crt
 echo -e "Caso aparece alguma mensagem de ERRO, verificar a opção: update-ca-certificates"
 echo -e "Pressione <Enter> para continuar..."
 read
