@@ -1,5 +1,5 @@
 # Autor: Robson Vaamonde
-# Site: www.procedimentosemti.com.br
+# Edicao: Fabio Silva
 # Script utilizado no Curso de OCS Inventory Server
 # Facebook: facebook.com/ProcedimentosEmTI
 # Facebook: facebook.com/BoraParaPratica
@@ -11,4 +11,4 @@
 # Kernel >= 4.4.x
 
 # Configuração do Hostname + FQDN (Fully Qualified Domain Name)
-ptispo01is01.pti.intra
+axlspo01is01.aexlog.intra
