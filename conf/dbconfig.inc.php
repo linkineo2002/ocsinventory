@@ -1,6 +1,6 @@
 <?php
-// Autor: Robson Vaamonde Site: www.procedimentosemti.com.br
-// Script utilizado no Curso de OCS Inventory Server
+// Autor: Robson Vaamonde
+// Edicao: Fabio Silva
 // Facebook: facebook.com/ProcedimentosEmTI
 // Facebook: facebook.com/BoraParaPratica
 // YouTube: youtube.com/BoraParaPratica
