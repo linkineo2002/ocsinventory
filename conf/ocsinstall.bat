@@ -1,5 +1,6 @@
 @echo off
 rem Autor: Robson Vaamonde
+rem Edicao: Fabio Silva
 rem Site: www.procedimentosemti.com.br
 rem Facebook: facebook.com/ProcedimentosEmTI
 rem Facebook: facebook.com/BoraParaPratica
@@ -15,7 +16,7 @@ echo Data/hora de inicio do processo de instalacao: %date% - %time%
 echo ==============================================================
 
 rem Parametros de utilização do OCS Inventory Agent
-rem /server=https://ocs.pti.intra/ocsinventory - Caminho do Servidor OCS Inventory
+rem /server=https://ocs.aexlog.intra/ocsinventory - Caminho do Servidor OCS Inventory
 rem /ssl=1 - Habilitar o SSL
 rem /ca="ocs.crt" - Caminho e nome do arquivo de Certificado
 rem /tag="Desktop" - Nome da TAG
@@ -25,7 +26,7 @@ rem /nosplash - Não mostrar a tela de Splash do OCS Inventory
 rem 
 
 echo Iniciando do processo de Instalacao do OCS Inventory Agent
-OCS-NG-Windows-Agent-Setup.exe /server=https://ocs.pti.intra/ocsinventory /ssl=1 /ca="ocs.crt" /tag="Desktop" /debug=1 /s /nosplash
+OCS-NG-Windows-Agent-Setup.exe /server=https://ocs.aexlog.intra/ocsinventory /ssl=1 /ca="ocs.crt" /tag="Desktop" /debug=1 /s /nosplash
 echo ==============================================================
 
 echo Copiando o Arquivo de Certificado SSL
