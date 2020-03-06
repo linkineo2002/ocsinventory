@@ -1,5 +1,5 @@
-# Autor: Robson Vaamonde<br>
-# Site: www.procedimentosemti.com.br<br>
+# Autor: Robson Vaamonde
+# Edicao: Fabio Silva
 # Facebook: facebook.com/ProcedimentosEmTI<br>
 # Facebook: facebook.com/BoraParaPratica<br>
 # YouTube: youtube.com/BoraParaPratica<br>
