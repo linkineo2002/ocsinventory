@@ -10,14 +10,18 @@
 # Testado e homologado para a versão do Ubuntu Server 16.04.x LTS x64
 # Kernel >= 4.4.x
 #
-# Instalação dos pacotes principais para a primeira etapa, indicado para a distribuição GNU/Linux Ubuntu Server 16.04.x LTS x64
+# Instalação do LAMP Server
+# Instalação do Apache2
+# Instalação do MySQL Server
+# Instalação do PhpMyAdmin
+# Instalação do PHP, Perl, Python
+# Instalação das Dependências via Perl CPAN
+# Instalação das Dependências do Netdata
 #
-# Atualização das listas do Apt-Get
-# Atualização dos Aplicativos Instalados
-# Atualização da Distribuição Ubuntu Server (Kernel)
-# Auto-Limpeza do Apt-Get
-# Limpeza do repositório Local do Apt-Get
-# Reinicialização do Servidor
+# Nesse script está sendo instalado todas as dependências do OCS Inventory Server, OCS Inventory Agent, Fusion Iventory, 
+# GLPI e do Netdata;
+# Nas linhas do apt-get install todas as dependências já estão sendo instaladas;
+# Nas linhas do perl -e -MCPAN está sendo instalada as dependências do OCS Server e Agent.
 #
 # Utilizar o comando: sudo -i para executar o script
 #
@@ -26,21 +30,9 @@
 source 00-parametros.sh
 #
 
-# Caminho do arquivo para o Log do script
+# Caminho para arquivo do Log do script
 LOG=$VARLOGPATH/$LOGSCRIPT
-#
-
-# Verificação da criação do Diretório de Log, usado somente no script de atualização
-if [ -e "$VARLOGPATH" ]; then
-	echo -e "Diretório: $VARLOGPATH já existe, continuando com o script"
-	sleep 3
-else
-	echo -e "Diretório: $VARLOGPATH não existe, criando o diretório..."
-	mkdir $VARLOGPATH
-	echo -e "Diretório criado com sucesso!!!, continuando com o script"
-	sleep 3
-fi
-
+#h
 
 if [ "$USUARIO" == "0" ]
 then
@@ -51,14 +43,6 @@ then
 					 clear
 					 echo -e "Usuário é `whoami`, continuando a executar o $LOGSCRIPT"
 					 echo
-					 echo -e "Atualização das Listas do Apt-Get"
-					 echo -e "Atualização dos Aplicativos Instalados"
-					 echo -e "Atualização da Distribuição Ubuntu Server (Kernel)"
-					 echo -e "Remoção dos aplicativos desnecessários"
-					 echo -e "Limpando o repositório Local do Apt-Get (Cache)"
-					 echo
-					 echo -e "Após o término o Servidor será reinicializado"
-					 echo
 					 echo  ============================================================ >> $LOG
 					 
 					 echo -e "Atualizando as listas do Apt-Get, aguarde..."
@@ -67,67 +51,350 @@ then
 					 export DEBIAN_FRONTEND=noninteractive
 					 
 					 #Atualizando as listas do apt-get
-					 apt-get update &>> $LOG
+					 apt-get update &>> $LOG 
 					 
-					 echo -e "Listas atualizadas com sucesso!!!, continuando com o script"
+					 echo -e "Listas atualizadas com sucesso!!!, continuando com o script."
 					 echo
 					 echo  ============================================================ >> $LOG
 
-					 echo -e "Atualizando os pacotes instalados, aguarde..."
+					 echo -e "Instalando o LAMP Server (Linux, Apache2, MySQL, PHP7, Perl, Python), aguarde..."
 					 
-					 #Fazendo a atualização de todos os pacotes instalados no servidor
-					 apt-get -o Dpkg::Options::="--force-confold" upgrade -q -y --force-yes &>> $LOG
+					 #Instalação dos principais pacotes do OCS Inventory e do GLPI integrado com o Apache2 e MySQL
+					 #Configurando as variáveis do Debconf para a instalação do MySQL em modo Noninteractive
+					 echo "mysql-server-5.7 mysql-server/root_password password $PASSWORD" |  debconf-set-selections
+					 echo "mysql-server-5.7 mysql-server/root_password_again password $PASSWORD" |  debconf-set-selections
 					 
-					 echo -e "Pacotes atualizados com sucesso!!!, continuando com o script"
+					 #Instalando o LAMP Server completo e todas as suas dependêncais do OCS Inventory Server, Agent, GLPI Help Desk e do Netdata
+					 apt-get -y install lamp-server^ gcc make autoconf autogen automake pkg-config uuid-dev net-tools pciutils smartmontools \
+					 read-edid nmap ipmitool dmidecode samba samba-common samba-testsuite snmp snmp-mibs-downloader unzip hwdata perl \
+					 perl-modules python python-dev python3-dev python-pip apache2-dev mysql-client python-pymssql python-mysqldb &>> $LOG
+					 
+					 echo -e "Instalação do LAMP Server feito com sucesso!!!, continuando com o script."
+					 echo
+					 echo  ============================================================ >> $LOG
+					 
+					 echo -e "Instalando as dependências do PHP7, aguarde..."
+					 					 
+					 #Instalando as dependências do PHP7 para dá suporte a recursos extras
+					 apt-get -y install php7.0-snmp php-mysql php7.0-dev php-mbstring php-soap php-dev php-apcu php-xmlrpc php7.0-zip \
+					 php7.0-gd php7.0-mysql php-pclzip php7.0-json php7.0-mbstring php7.0-curl php7.0-imap php7.0-ldap zlib1g-dev \
+					 php-mbstring php-gettext php-cas &>> $LOG
+					 
+					 echo -e "Instalação das dependências do PHP7 feito com sucesso!!!, continuando com o script."
+					 echo
+					 echo  ============================================================ >> $LOG
+					 
+					 echo -e "Instalando as dependências do Perl, aguarde..."
+					 					 
+					 #Instalando as dependências do Perl e GCC para dá suporte aos recursos extras do OCS Inventory e GLPI
+					 apt-get -y install libc6-dev libcompress-raw-zlib-perl libwww-perl libdigest-md5-file-perl libnet-ssleay-perl \
+					 libcrypt-ssleay-perl libnet-snmp-perl libproc-pid-file-perl libproc-daemon-perl libarchive-zip-perl \
+					 libnet-cups-perl libphp-pclzip libmysqlclient-dev libapache2-mod-perl2 libapache2-mod-php libnet-netmask-perl \
+					 libio-compress-perl libxml-simple-perl libdbi-perl libdbd-mysql-perl libapache-dbi-perl libsoap-lite-perl \
+					 libnet-ip-perl libmodule-build-perl libmodule-install-perl libfile-which-perl libfile-copy-recursive-perl \
+					 libuniversal-require-perl libtest-http-server-simple-perl libhttp-server-simple-authen-perl libhttp-proxy-perl \
+					 libio-capture-perl libipc-run-perl libnet-telnet-cisco-perl libtest-compile-perl libtest-deep-perl \
+					 libtest-exception-perl libtest-mockmodule-perl libtest-mockobject-perl libtest-nowarnings-perl \
+					 libxml-treepp-perl libparallel-forkmanager-perl libparse-edid-perl libdigest-sha-perl libtext-template-perl \
+					 libsocket-getaddrinfo-perl libcrypt-des-perl libnet-nbname-perl libyaml-perl libyaml-shell-perl \
+					 libyaml-libyaml-perl libdata-structure-util-perl liblwp-useragent-determined-perl libio-socket-ssl-perl \
+					 libdatetime-perl libthread-queue-any-perl libnet-write-perl libarchive-extract-perl libjson-pp-perl \
+					 liburi-escape-xs-perl liblwp-protocol-https-perl libnet-ping-external-perl libnmap-parser-perl \
+					 libmojolicious-perl libswitch-perl libplack-perl liblwp-useragent-determined-perl libsys-syslog-perl \
+					 libdigest-hmac-perl libossp-uuid-perl &>> $LOG
+					 
+					 echo -e "Instalação das dependências do Perl feito com sucesso!!!, continuando com o script."
 					 echo
 					 echo  ============================================================ >> $LOG
 
-					 echo -e "Atualizando a distribuição é o Kernel, aguarde..."
-					 echo -e "Kernel atual: `uname -r`"
+					 echo -e "Instalando o PhpMyAdmin, aguarde..."
 					 
-					 #Fazendo a atualização da distribuição e do Kernel
-					 apt-get -o Dpkg::Options::="--force-confold" dist-upgrade -q -y --force-yes &>> $LOG
+					 #Configurando as variáveis do Debconf para a instalação do PhpMyAdmin em modo Noninteractive
+					 echo "phpmyadmin phpmyadmin/internal/skip-preseed boolean true" |  debconf-set-selections
+					 echo "phpmyadmin phpmyadmin/dbconfig-install boolean true" |  debconf-set-selections
+					 echo "phpmyadmin phpmyadmin/app-password-confirm password $APP_PASSWORD" |  debconf-set-selections
+					 echo "phpmyadmin phpmyadmin/reconfigure-webserver multiselect $WEBSERVER" |  debconf-set-selections
+					 echo "phpmyadmin phpmyadmin/mysql/admin-user string $ADMINUSER" |  debconf-set-selections
+					 echo "phpmyadmin phpmyadmin/mysql/admin-pass password $ADMIN_PASS" |  debconf-set-selections
+					 echo "phpmyadmin phpmyadmin/mysql/app-pass password $APP_PASS" |  debconf-set-selections
+					 
+					 #Instalando o PhpMyAdmin
+					 apt-get -y install phpmyadmin &>> $LOG
+					 
+					 #Atualizando as dependências do PhpMyAdmin, ativando os recursos dos módulos do PHP no Apache2
+					 phpenmod mcrypt
+					 phpenmod mbstring
+					 
+					 echo -e "Instalação do PhpMyAdmin feito com sucesso!!!"
+					 echo
+					 
+					 echo -e "Após a reinicialização, testar o servidor Apache2 na URL: http://`hostname`"
+					 echo -e "Após a reinicialização, testar o PHP na URL: http://`hostname`/phpinfo.php"
+					 echo -e "Após a reinicialização, testar o PhpMyAdmin na URL: http://`hostname`/phpmyadmin"
+					 echo
+					 
+					 echo -e "Pressione <Enter> para continuar com o script."
+					 read
+					 sleep 2
+					 clear
+					 echo ============================================================ >> $LOG
+
+					 echo -e "Instalação das dependências do Perl XML::Entities via CPAN, pressione <Enter> para continuar"
+					 read
+					 
+					 #Instalação do XML::Entities
+					 #Mensagem: Would you like to configure as much as possible automatically? [Yes] <-- Pressione <Enter>
+					 perl -MCPAN -e 'install XML::Entities'
+					 echo
+					 
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo -e "Instalação das dependências do Perl SOAP::Lite via CPAN, pressione <Enter> para continuar"
+					 read
+					 
+					 #Instalação do SOAP::Lite
+					 #Mensagem: WARNING: Please tell me where I can find your apache src: <-- digite q Pressione <Enter>
+					 #Esse procedimento demora um pouco, não se preocupe com a mensagem de erro no final, está associado ao Source 
+					 #do Apache
+					 perl -MCPAN -e 'install SOAP::Lite'
+					 echo
+					 
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+
+					 echo -e "Instalação das dependências do Perl Linux::Ethtool via CPAN, pressione <Enter> para continuar"
+					 read
+					 
+					 #Instalação do Linux::Ethtool
+					 perl -MCPAN -e 'install Linux::Ethtool'
+					 echo
+					 
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+
+					 echo -e "Instalação das dependências do Perl Apache2::SOAP via CPAN, pressione <Enter> para continuar"
+					 read
+					 
+					 #Validando a existência do diretório do Apache2
+					 if [ -d /usr/include/apache2 ]; then
+					 	echo -e "Diretório /usr/include/apache2 já existe, continuando com o script"
+					 else
+					 	echo -e "Diretório /usr/include/apache2 não existe, criando o diretório"
+					 	
+							#Criando o diretório do SOAP para o Apache2
+					 		mkdir -v /usr/include/apache2 &>> $LOG
+					 	
+						echo -e "Diretório criado com sucesso!!!, continuando o script"
+						echo
+					 fi
+					 
+					 #Instalação do Apache2::SOAP				 
+					 perl -MCPAN -e 'install Apache2::SOAP'
+					 echo
+					 
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+
+					 echo -e "Instalação das dependências do Perl nvidia::ml via CPAN, pressione <Enter> para continuar"
+					 read
+					 
+					 #Validando a existencia do Chip Gráfico da NVIDIA
+					 if [ "$NVIDIA" == "NVIDIA" ]; then
+					 	echo -e "Você tem o Chip Gráfico da NVIDIA, instalando o Módulo Perl, pressione <Enter> para continuar"
+							read
+					 		
+							#Instalação do nvidia::ml
+					 		perl -MCPAN -e 'install nvidia::ml'
+							
+							echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 		read
+					 		sleep 2
+					 		clear
+					 else
+					 	echo -e "Você não tem o Chip Gráfico da NVIDIA, pressione <Enter> para continuar"
+							read
+					 		sleep 2
+					 		clear
+					 fi
+
+					 echo -e "Instalação das dependências do Perl Net::Ping via CPAN, pressione <Enter> para continuar"
+					 read
+					 
+					 #Instalação do Net::Ping					 
+					 perl -MCPAN -e 'install Net::Ping'
+					 echo
+					 
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 					 
+					 echo -e "Instalação das dependências do LWP::UserAgent::Cached via CPAN, pressione <Enter> para continuar"
+					 read
+					 
+					 #Instalação do LWP::UserAgent::Cached
+					 #Menssagem: Append this modules to installaation queue? [y] <-- Pressione <Enter>
+					 perl -MCPAN -e 'install LWP::UserAgent::Cached'
+					 echo
+					 
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 					 
+					 echo -e "Instalação das dependências do Mac::SysProfile via CPAN, pressione <Enter> para continuar"
+					 read
+					 
+					 #Instalação do Mac::SysProfile
+					 perl -MCPAN -e 'install Mac::SysProfile'
+					 echo
+					 
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo -e "Instalação das dependências do Mojolicious::Lite via CPAN, pressione <Enter> para continuar"
+					 read
+					 
+					 #Instalação do Mojolicious::Lite
+					 perl -MCPAN -e 'install Mojolicious::Lite'
+					 echo
+					 
+					 echo -e "Instalação concluída com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo ============================================================ >> $LOG
+
+					 echo -e "Editando o arquivo do Apache2, pressione <Enter> para continuar"
+					 read
+					 
+					 #Fazendo o backup do arquivo original
+					 mv -v /etc/apache2/apache2.conf /etc/apache2/apache2.conf.bkp >> $LOG
+					 echo -e "Backup feito com sucesso!!!"
+					 sleep 2
+					 
+					 #Atualização o arquivo de configuração do Apache2
+					 cp -v conf/apache2.conf /etc/apache2/apache2.conf >> $LOG
+					 echo -e "Atualização feita com sucesso!!!"
+					 sleep 2
+					 
+					 #Editando o arquivo de configuração
+					 vim /etc/apache2/apache2.conf
+					 
+					 #Reinicializando o serviço do Apache2 Server
+					 sudo service apache2 restart
+					 echo -e "Servidor reinicializado com sucesso!!!"
+					 sleep 2
 					 
 					 echo
-					 echo -e "Distribuição e Kernel atualizados, versões instaladas."
-					 #Listando os pacotes instalados, filtrando por palavras, cortando por colunas.
-					 dpkg --list | grep linux-image-4.4 | cut -d' ' -f 3
+					 echo -e "Arquivo editado com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
 					 
-					 echo -e "Distribuição e Kernel atualizadas com sucesso!!!, continuando com o script"
+					 echo -e "Editando o arquivo do MySQL Server, pressione <Enter> para continuar"
+					 read
+					 
+					 #Arquivo de configuração do Banco de Dados do MySQL Server
+					 #Permitir acesso remoto ao MySQL comentando a linha: bind-address
+					 #Fazendo o backup do arquivo de configuração original
+					 mv -v /etc/mysql/mysql.conf.d/mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf.bkp &>> $LOG
+					 echo -e "Backup feito com sucesso!!!"
+					 sleep 2
+					 
+					 #Atualizando para o novo arquivo de configuração
+					 cp -v conf/mysqld.cnf /etc/mysql/mysql.conf.d/ &>> $LOG
+					 echo -e "Atualização feita com sucesso!!!"
+					 sleep 2
+					 
+					 #Editando o arquivo de configuração
+					 vim /etc/mysql/mysql.conf.d/mysqld.cnf
+					 
+					 #Reinicializando o serviço do MySQL Server
+					 sudo service mysql restart
+					 echo -e "Servidor reinicializado com sucesso!!!"
+					 sleep 2
+					 
+					 echo
+					 echo -e "Arquivo editado com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo -e "Editando o arquivo do PHP, pressione <Enter> para continuar"
+					 read
+					 
+					 #Arquivo de configuração do PHP que será utilizado pelo Apache2
+					 #Aumentar os valores das váriaveis: post_max_size e upload_max_filesize para: 250MB
+					 #Fazendo o backup do arquivo de configuração original
+					 mv -v /etc/php/7.0/apache2/php.ini /etc/php/7.0/apache2/php.ini.bkp &>> $LOG
+					 echo -e "Backup feito com sucesso!!!"
+					 sleep 2
+					 
+					 #Atualizando para o novo arquivos de configuração
+					 cp -v conf/php.ini /etc/php/7.0/apache2/ &>> $LOG
+					 echo -e "Atualização feita com sucesso!!!"
+					 sleep 2
+					 
+					 #Editando o arquivo de configuração
+					 vim /etc/php/7.0/apache2/php.ini
+					 
+					 #Reinicializando o serviço do Apache2
+					 sudo service apache2 restart
+					 echo -e "Servidor reinicializado com sucesso!!!"
+					 sleep 2
+					 
+					 echo
+					 echo -e "Arquivo editado com sucesso!!!, pressione <Enter> para continuar"
+					 read
+					 sleep 2
+					 clear
+					 
+					 echo -e "Criando o arquivo de verificação do PHP, aguarde..."
+					 cp -v conf/phpinfo.php /var/www/html &>> $LOG
+					 echo -e "Arquivo criado com sucesso!!!, continuando o script"
+					 echo
+
+					 echo -e "Removendo aplicativos desnecessários, aguarde..."
+					 
+					 #Limpando o diretório de cache do apt-get
+					 apt-get autoremove &>> $LOG
+					 apt-get autoclean &>> $LOG
+					 
+					 echo -e "Aplicativos removidos com sucesso!!!, continuando com o script"
 					 echo
 					 echo ============================================================ >> $LOG
 
-					 echo -e "Remoção dos aplicativos desnecessários, aguarde..."
-					 
-					 #Fazendo a autoremoção de aplicativas instalados
-					 apt-get -y autoremove &>> $LOG
-					 apt-get -y autoclean &>> $LOG
-					 
-					 echo -e "Remoção dos aplicativos concluída com sucesso!!!, continuando com o script"
-					 echo
-					 echo ============================================================ >> $LOG
-					 echo >> $LOG
-					 
-					 echo -e "Limpando o cache do Apt-Get, aguarde..."
+					 echo -e "Limpando o Cache do Apt-Get, aguarde..."
 					 
 					 #Limpando o diretório de cache do apt-get
 					 apt-get clean &>> $LOG
 					 
-					 echo -e "Cache limpo com sucesso!!!, continuando com o script"
+					 echo -e "Cache Limpo com Sucesso!!!"
 					 echo
 					 echo ============================================================ >> $LOG
-					 echo >> $LOG
-					 echo -e "Fim do $LOGSCRIPT em: `date`" >> $LOG
 
+					 echo -e "Fim do $LOGSCRIPT em: `date`" >> $LOG
+					 echo -e "Instalação do LAMP Server Feito com Sucesso!!!!!"
 					 echo
-					 echo -e "Atualização das Listas, Atualização dos Aplicativos e Atualização do Kernel feito com sucesso!!!!!"
-					 echo
-					 # Script para calcular o tempo gasto para a execução
+					 # Script para calcular o tempo gasto para a execução do lamp.sh
 						 DATAFINAL=`date +%s`
 						 SOMA=`expr $DATAFINAL - $DATAINICIAL`
 						 RESULTADO=`expr 10800 + $SOMA`
 						 TEMPO=`date -d @$RESULTADO +%H:%M:%S`
-					 echo -e "Tempo gasto para execução do 01-update.sh: $TEMPO"
+					 echo -e "Tempo gasto para execução do lamp.sh: $TEMPO"
 					 echo -e "Pressione <Enter> para reinicializar o servidor: `hostname`"
 					 read
 					 sleep 2
