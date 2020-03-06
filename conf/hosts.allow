@@ -17,7 +17,7 @@ sshd: 192.168.15.130: spawn /bin/echo "$(date) Conexão Liberada - SSH - IP %a" 
 
 #Exemplos de configuração:
 #Liberando uma subrede
-#sshd: 192.168.1. : spawn /bin/echo "$(date) Conexão Liberada - SSH - IP %a" >> /var/log/tcpwrappers-allow-ssh.log
-#sshd: 192.168.1.0/255.255.255.0: spawn /bin/echo "$(date) Conexão Liberada - SSH - IP %a" >> /var/log/tcpwrappers-allow-ssh.log
+#sshd: 192.168.15. : spawn /bin/echo "$(date) Conexão Liberada - SSH - IP %a" >> /var/log/tcpwrappers-allow-ssh.log
+#sshd: 192.168.15.0/255.255.255.0: spawn /bin/echo "$(date) Conexão Liberada - SSH - IP %a" >> /var/log/tcpwrappers-allow-ssh.log
 #sshd: *.aexlog.intra: spawn /bin/echo "$(date) Conexão Liberada - SSH - IP %a" >> /var/log/tcpwrappers-allow-ssh.log
-#sshd: 192.168.1. EXCEPT 192.168.15.11: spawn /bin/echo "$(date) Conexão Liberada - SSH - IP %a" >> /var/log/tcpwrappers-allow-ssh.log
+#sshd: 192.168.15. EXCEPT 192.168.15.11: spawn /bin/echo "$(date) Conexão Liberada - SSH - IP %a" >> /var/log/tcpwrappers-allow-ssh.log
