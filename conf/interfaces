@@ -1,5 +1,5 @@
 # Autor: Robson Vaamonde
-# Site: www.procedimentosemti.com.br
+# Edicao: Fabio Silva
 # Facebook: facebook.com/ProcedimentosEmTI
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
@@ -19,11 +19,11 @@ iface lo inet loopback
 # Configurações da interface de rede estática enp0s3
 auto enp0s3
 iface enp0s3 inet static
-address 172.16.10.11
+address 192.168.15.11
 netmask 255.255.255.0
-network 172.16.10.0
-gateway 172.16.10.1
-broadcast 172.16.10.255
-dns-nameservers 172.16.10.10
-dns-search pti.intra
-dns-domain pti.intra
+network 192.168.15.0
+gateway 192.168.15.1
+broadcast 192.168.15.255
+dns-nameservers 192.168.15.10
+dns-search aexlog.intra
+dns-domain aexlog.intra
