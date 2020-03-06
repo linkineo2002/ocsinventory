@@ -193,3 +193,4 @@ else
 	 echo -e "Pressione <Enter> para finalizar o script"
 	read
 fi
+	
