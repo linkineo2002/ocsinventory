@@ -1,6 +1,6 @@
 #!/bin/bash
 # Autor: Robson Vaamonde
-# Site: www.procedimentosemti.com.br
+# Edicao: Fabio Silva
 # Facebook: facebook.com/ProcedimentosEmTI
 # Facebook: facebook.com/BoraParaPratica
 # YouTube: youtube.com/BoraParaPratica
@@ -82,10 +82,10 @@ then
 					 #Country Name (2 letter code): BR <-- pressione <Enter>
 					 #State or Province Name (full name): Brasil <-- pressione <Enter>
 					 #Locality Name (eg, city): Sao Paulo <-- pressione <Enter>
-					 #Organization Name (eg, company): Bora para Pratica <-- pressione <Enter>
-					 #Organization Unit Name (eg, section): Procedimentos em TI <-- pressione <Enter>
-					 #Common Name (eg, serveer FQDN or YOUR name): ocs.pti.intra <-- pressione <Enter>
-					 #Email Address: pti@pti.intra <-- pressione <Enter>
+					 #Organization Name (eg, company): Aex Logistica Expressa Ltda ME  <-- pressione <Enter>
+					 #Organization Unit Name (eg, section): Aexlog <-- pressione <Enter>
+					 #Common Name (eg, serveer FQDN or YOUR name): ocs.aexlog.intra <-- pressione <Enter>
+					 #Email Address: ti@aexlog.com.br <-- pressione <Enter>
 					 #A challenge password: <-- pressione <Enter>
 					 #A optional company name: <-- pressione <Enter>
 					 openssl req -new -key ocs.key -out ocs.csr
