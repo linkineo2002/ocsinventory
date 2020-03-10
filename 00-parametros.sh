@@ -131,7 +131,6 @@ OCSAGENTWIN10="https://github.com/OCSInventory-NG/WindowsAgent/releases/download
 OCSAGENTWINXP="https://github.com/OCSInventory-NG/WindowsAgent/releases/download/2.1.1.1/OCSNG-Windows-Agent-2.1.1.zip"
 OCSAGENTMAC="https://github.com/OCSInventory-NG/UnixAgent/releases/download/v2.4.2/Ocsinventory_Agent_MacOSX-2.4.2.pkg.zip"
 OCSAGENTANDROID="https://github.com/OCSInventory-NG/AndroidAgent/releases/download/2.3.1/OCSNG-Android-Agent-2.3.1.apk"
-OCSAGENTTOOLSX64="https://github.com/OCSInventory-NG/Packager-for-Windows/releases/download/2.6/OCSNG-Windows-Packager-2.6.zip"
 OCSAGENTTOOLS="https://github.com/OCSInventory-NG/Packager-for-Windows/releases/download/2.6/OCS-Windows-Packager-2.6.zip"
 OCSAGENTDEPLOY="https://github.com/OCSInventory-NG/Agent-Deployment-Tool/releases/download/2.3/OCSNG-Agent-Deploy-Tool-2.3.zip"
 OCSUNIXPACKAGER="https://github.com/OCSInventory-NG/Packager-for-Unix/releases/download/1.0/OCSNG-Unix-Packager-1.0.zip"
