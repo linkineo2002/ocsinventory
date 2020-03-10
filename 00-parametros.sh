@@ -126,13 +126,13 @@ NVIDIA=`lshw -class display | grep NVIDIA | cut -d':' -f2 | cut -d' ' -f2`
 # Site: https://www.ocsinventory-ng.org/en/
 # Versões antigas utilizada no vídeo: Win10-2.3.1.1, WinXP-2.1.1, Mac-2.3.1, Android-2.3.1, Tools-2.3 e Deploy-2.3
 # Versões novas atualizadas no dia 14/06/2019 - verificar arquivo CHANGELOG
-OCSAGENTWIN10X64="https://github.com/OCSInventory-NG/WindowsAgent/releases/download/2.6.0.0/OCSNG-Windows-Agent-2.6.0.0.zip"
+OCSAGENTWIN10X64="https://github.com/OCSInventory-NG/WindowsAgent/releases/download/2.6.0.0/OCS-Windows-Agent-2.6.0.0.zip"
 OCSAGENTWIN10="https://github.com/OCSInventory-NG/WindowsAgent/releases/download/2.4.0.0/OCSNG-Windows-Agent-2.4.0.0.zip"
 OCSAGENTWINXP="https://github.com/OCSInventory-NG/WindowsAgent/releases/download/2.1.1.1/OCSNG-Windows-Agent-2.1.1.zip"
 OCSAGENTMAC="https://github.com/OCSInventory-NG/UnixAgent/releases/download/v2.4.2/Ocsinventory_Agent_MacOSX-2.4.2.pkg.zip"
 OCSAGENTANDROID="https://github.com/OCSInventory-NG/AndroidAgent/releases/download/2.3.1/OCSNG-Android-Agent-2.3.1.apk"
 OCSAGENTTOOLSX64="https://github.com/OCSInventory-NG/Packager-for-Windows/releases/download/2.6/OCSNG-Windows-Packager-2.6.zip"
-OCSAGENTTOOLS="https://github.com/OCSInventory-NG/Packager-for-Windows/releases/download/2.3/OCSNG-Windows-Packager-2.3.zip"
+OCSAGENTTOOLS="https://github.com/OCSInventory-NG/Packager-for-Windows/releases/download/2.6/OCS-Windows-Packager-2.6.zip"
 OCSAGENTDEPLOY="https://github.com/OCSInventory-NG/Agent-Deployment-Tool/releases/download/2.3/OCSNG-Agent-Deploy-Tool-2.3.zip"
 OCSUNIXPACKAGER="https://github.com/OCSInventory-NG/Packager-for-Unix/releases/download/1.0/OCSNG-Unix-Packager-1.0.zip"
 
